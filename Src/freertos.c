@@ -26,7 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */     
-
+#include "stm32f4xx_hal.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -133,6 +133,7 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
+
   for(;;)
   {
     osDelay(1);
@@ -153,7 +154,12 @@ void StartLEDTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    osDelay(1000);
+    HAL_GPIO_WritePin(greenLEDBoard_GPIO_Port, greenLEDBoard_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(redLEDExt_GPIO_Port, redLEDExt_Pin, GPIO_PIN_SET);
+    osDelay(1000);
+    HAL_GPIO_WritePin(greenLEDBoard_GPIO_Port, greenLEDBoard_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(redLEDExt_GPIO_Port, redLEDExt_Pin, GPIO_PIN_RESET);
   }
   /* USER CODE END StartLEDTask */
 }
