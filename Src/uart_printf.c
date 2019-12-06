@@ -23,15 +23,3 @@ void uart_printf(char *fmt, ...)
         va_end(argp);
 }
 
-int _write(int file, char *data, int len)
-{
-        if ( (file != STDOUT_FILENO) && (file != STDERR_FILENO))
-        {
-                errno = EBADF;
-                return -1;
-        }
-
-        HAL_StatusTypeDef status = HAL_UART_Transmit(&huart2, (uint8_t *)data, len, 0xffff);
-
-        return (status == HAL_OK ? len : 0);
-}
